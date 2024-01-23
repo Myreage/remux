@@ -1,2 +1,17 @@
-// option 1 on laisse le user nous passer lens et reducer
-// option 2 le user nous passe juste le reducer et on se démerde
+import { Reducer } from "./lenses";
+
+type Store<State> = {
+  apply: (reducer: Reducer<State>) => void;
+  readState: () => State;
+};
+
+export const initStore = <State>(initialState: State): Store<State> => {
+  let state = initialState;
+
+  return {
+    readState: () => state,
+    apply: (reducer) => {
+      state = reducer(state);
+    },
+  };
+};

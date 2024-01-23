@@ -2,7 +2,7 @@ import { Reducer } from "./lenses";
 
 type Store<State> = {
   apply: (reducer: Reducer<State>) => void;
-  readState: () => State;
+  readState: () => Readonly<State>;
 };
 
 export const initStore = <State>(initialState: State): Store<State> => {
